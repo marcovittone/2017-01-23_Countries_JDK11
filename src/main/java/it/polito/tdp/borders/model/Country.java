@@ -5,7 +5,7 @@ public class Country {
 	private int cCode ; // Country Code for the state
 	private String stateAbb ; // State Abbreviation (3 capital letters)
 	private String stateName ; // Full State name
-	
+	private int numStatiConfinanti;
 	/**
 	 * Initialize a new {@link Country} object, with full parameters.
 	 * 
@@ -25,6 +25,15 @@ public class Country {
 	 */
 	public int getcCode() {
 		return cCode;
+	}
+
+	
+	public int getNumStatiConfinanti() {
+		return numStatiConfinanti;
+	}
+
+	public void setNumStatiConfinanti(int numStatiConfinanti) {
+		this.numStatiConfinanti = numStatiConfinanti;
 	}
 
 	/**
@@ -95,7 +104,7 @@ public class Country {
 	 */
 	@Override
 	public String toString() {
-		return String.format("[%s=%s]", stateAbb, stateName);
+		return this.stateAbb+" - "+this.stateName;
 	}
 	
 	

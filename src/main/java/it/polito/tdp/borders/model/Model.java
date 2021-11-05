@@ -1,5 +1,8 @@
 package it.polito.tdp.borders.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +30,7 @@ public class Model {
 	}
 	
 	
-	public void creaGrafo(int year) {
+	public List<Country> creaGrafo(int year) {
 		
 		this.grafo = new SimpleGraph<>(DefaultEdge.class);
 		
@@ -38,6 +41,16 @@ public class Model {
 		for(Connessione c: connessioni) {
 			Graphs.addEdgeWithVertices(this.grafo, this.paesiMap.get(c.getState1no()), this.paesiMap.get(c.getState2no()));
 		}
+		
+		for(Country c:this.grafo.vertexSet()) {
+			c.setNumStatiConfinanti(this.grafo.degreeOf(c));
+		}
+		
+		List<Country> list = new ArrayList<Country>(this.grafo.vertexSet());
+		ComparatorePaesiPerStatiConfinanti c = new ComparatorePaesiPerStatiConfinanti();
+		Collections.sort(list, c);
+		
+		return list;
 		
 		//System.out.println("GRAFO CREATO CON "+this.grafo.vertexSet().size()+" VERTICI E "+this.grafo.edgeSet().size()+" ARCHI");
 		
