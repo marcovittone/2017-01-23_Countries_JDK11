@@ -9,10 +9,10 @@ public class TestDAO {
 	public static void main(String[] args) {
 		List<Country> list ;
 		BordersDAO dao = new BordersDAO() ;
-		list = dao.loadAllCountries() ;
-		for(Country c: list) {
-			System.out.println(c);
-		}
+//		list = dao.loadAllCountries() ;
+//		for(Country c: list) {
+//			System.out.println(c);
+//		}
 	}
 
 }
