@@ -54,49 +54,6 @@ public class BordersDAO {
 	}
 	
 	
-public List<Country> loadAllCountriesGivenTheYear(int year) {
-		
-		String sql = "SELECT StateAbb,CCode,StateNme "
-				+ "FROM contiguity, country "
-				+ "WHERE YEAR <= ? AND contiguity.state1no = CCode "
-				+ "GROUP BY contiguity.state1no" ;
-
-		try {
-			Connection conn = DBConnect.getConnection() ;
-
-			PreparedStatement st = conn.prepareStatement(sql) ;
-			
-			st.setInt(1, year);
-			
-			ResultSet rs = st.executeQuery() ;
-			
-			List<Country> list = new LinkedList<Country>() ;
-			
-			while( rs.next() ) {
-				
-				Country c = new Country(
-						rs.getInt("ccode"),
-						rs.getString("StateAbb"), 
-						rs.getString("StateNme")) ;
-				
-				list.add(c) ;
-				
-			}
-			
-			conn.close() ;
-			
-			return list ;
-			
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return null ;
-	}
-
-
 public List<Connessione> loadAllConnectionGivenTheYear(int year) {
 	
 	String sql = "SELECT state1no,state2no "

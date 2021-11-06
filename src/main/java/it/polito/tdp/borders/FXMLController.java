@@ -26,7 +26,7 @@ public class FXMLController {
     private TextField txtAnno;
 
     @FXML
-    private ComboBox<?> boxNazione;
+    private ComboBox<Country> boxNazione;
 
     @FXML
     private TextArea txtResult;
@@ -57,11 +57,31 @@ public class FXMLController {
     		this.txtResult.appendText(c+" "+c.getNumStatiConfinanti()+"\n");
     	}
     	
+    	this.boxNazione.getItems().addAll(result);
+    	
     }
 
     @FXML
     void doSimula(ActionEvent event) {
-
+    	
+    	this.txtResult.clear();
+    	
+    	Country c = this.boxNazione.getValue();
+    	
+    	if(c == null){
+    		this.txtResult.setText("SELEZIONARE STATO INSERIMENTO MIGRANTI");
+    		return;
+    	}
+    	
+    	this.model.simulate(c);
+    	
+    	this.txtResult.appendText("NUMERO DI INSTANTI CONSIDERATI :"+this.model.getT()+"\n");
+    	this.txtResult.appendText("ELENCO DEI PAESI ACCOGLIENTI: \n");
+    	
+    	for(Country cc: this.model.getPaesiAccoglienti()) {
+    		this.txtResult.appendText(cc+" "+cc.getStanziali()+"\n");
+    	}
+    	
     }
 
     @FXML
