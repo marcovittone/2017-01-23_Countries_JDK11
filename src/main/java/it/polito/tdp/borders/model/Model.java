@@ -67,15 +67,23 @@ public class Model {
 		this.T=1;
 		this.eventi = new PriorityQueue<>();
 		
+		for(Country cc:this.grafo.vertexSet()) {
+			if(cc.getStanziali()>0)
+				cc.setStanziali(0);
+		}
+		
 		
 		this.eventi.add(new Event(c,this.nonStanzialiTotali,T));
 		
 		while(this.nonStanzialiTotali>0)
 			this.processEvent(this.eventi.poll());
 			
+			
 	}
 	
 	private void processEvent(Event e) {
+		
+		this.T= e.getT();
 		
 		Country c = e.getCountry();
 		
@@ -104,7 +112,7 @@ public class Model {
 		
 		
 		for(Country cc: paesi)
-			this.eventi.add(new Event(cc,divisione,this.T++));
+			this.eventi.add(new Event(cc,divisione,T+1));
 		
 	}
 
